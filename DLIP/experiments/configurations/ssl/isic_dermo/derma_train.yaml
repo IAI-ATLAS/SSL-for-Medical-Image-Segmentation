@@ -1,0 +1,182 @@
+experiment.name:
+  value: first-shot
+# Seed of this experiment to ensure reproducibility.
+experiment.seed:
+  value: 1337
+
+# Model Configuration
+model.name:
+  value: MoDeCo
+model.params.num_negatives:
+  value: 1600
+model.params.num_negatives_val:
+  value: 400
+# global, layer1,layer2,layer3,layer4,layer5
+model.params.activated_layers:
+  #value: [0,1,2,3,4,5]
+  #value: [0,4,5]
+  #value: [0,3,4,5]
+model.params.loss_weights:
+  #value: [1.0, 0.1, 0.1, 0.4, 0.7, 1.0]
+  #value: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+model.params.global_feature_space:
+  #value: true
+  #value: false
+
+# Optimizer
+model.optimizer.type:
+  value: SGD
+model.optimizer.params.lr:
+  value: 0.03
+model.optimizer.params.momentum:
+  value: 0.9
+model.optimizer.params.weight_decay:
+  value: 0.0001
+# LR Scheduler
+model.optimizer.lrs.type:
+  value: CosineAnnealingLR
+model.optimizer.lrs.params.T_max:
+  value: 2000
+
+
+# Trainer Configuration
+train.trainer.max_epochs:
+  value: 2000
+train.trainer.num_sanity_val_steps:
+  value: 0
+train.trainer.gpus:
+  value: 1
+train.trainer.reload_dataloaders_every_epoch:
+  value: false
+
+# Data Configuration
+data.datamodule.name:
+  value: IsicDermoDataModule
+data.datamodule.root_dirs:
+  value: 
+    local: /home/ws/kg2371/datasets/2017_ISIC_Derma
+    iai_gpu: 
+data.datamodule.device:
+  value: 
+    local
+data.datamodule.arguments.initial_labeled_ratio:
+  value: 1.0
+data.datamodule.arguments.val_to_train_ratio:
+  value: 0.2
+data.datamodule.arguments.batch_size:
+  value: 25
+data.datamodule.arguments.dataset_size:
+  value: 1.0
+
+
+# Callbacks Configuration
+train.callbacks.save_k_top_models:
+  value: 10
+train.callbacks.early_stopping_enabled:
+  value: false
+train.callbacks.early_stopping_patience:
+  value: 40
+train.callbacks.best_metrics_log_enabled:
+  value: true
+train.callbacks.log_best_metric_dict:
+  value: {"val/loss":"min"}
+train.callbacks.epoch_duration_enabled:
+  value: true
+
+# General Augmentations
+data.img_processing.norm_type:
+  value: per_image
+
+data.img_processing.img_type:
+  value: rgb_8_bit
+data.img_processing.replay_processing_pipeline:
+  value: false
+data.img_processing.img_size:
+  value: [256, 256]
+
+# Augmentations
+data.img_processing.aug1.replay_processing_pipeline:
+  value: false
+
+# Random Crop
+data.img_processing.aug1.random_resized_propability:
+  value: 1.0
+data.img_processing.aug1.random_resized_crop_size:
+  value: [256, 256]
+data.img_processing.aug1.random_resized_scale:
+  value: [0.2, 1.0]
+data.img_processing.aug1.random_resized_ratio:
+  value: [0.75, 1.3333333333333333]
+
+# Color Jitter
+data.img_processing.aug1.color_jitter_prob:
+  value: 0.8
+data.img_processing.aug1.color_jitter_brightness:
+  value: 0.4
+data.img_processing.aug1.color_jitter_contrast:
+  value: 0.4
+data.img_processing.aug1.color_jitter_saturation:
+  value: 0.4
+data.img_processing.aug1.color_jitter_hue:
+  value: 0.1
+
+# To Gray
+data.img_processing.aug1.to_gray_prob:
+  value: 0.2
+
+# Gaussian Blur
+data.img_processing.aug1.gaussian_blur_prop:
+  value: 0.5
+data.img_processing.aug1.gaussian_blur_sigma:
+  value: [0.1,2.0]
+
+# Flip
+data.img_processing.aug1.aug_flip_prob:
+  value: 0.5
+
+
+# Random Crop
+data.img_processing.aug2.random_resized_propability:
+  value: 1.0
+data.img_processing.aug2.random_resized_crop_size:
+  value: [256, 256]
+data.img_processing.aug2.random_resized_scale:
+  value: [0.2, 1.0]
+data.img_processing.aug2.random_resized_ratio:
+  value: [0.75, 1.3333333333333333]
+
+# Color Jitter
+data.img_processing.aug2.color_jitter_prob:
+  value: 0.8
+data.img_processing.aug2.color_jitter_brightness:
+  value: 0.4
+data.img_processing.aug2.color_jitter_contrast:
+  value: 0.4
+data.img_processing.aug2.color_jitter_saturation:
+  value: 0.4
+data.img_processing.aug2.color_jitter_hue:
+  value: 0.1
+
+# To Gray
+data.img_processing.aug1.to_gray_prob:
+  value: 0.2
+
+# Gaussian Blur
+data.img_processing.aug2.gaussian_blur_prop:
+  value: 0.5
+data.img_processing.aug2.gaussian_blur_sigma:
+  value: [0.1,2.0]
+
+# Flip
+data.img_processing.aug2.aug_flip_prob:
+  value: 0.5
+
+ # Validation Augmentations
+data.img_processing.validation_aug.random_resized_propability:
+  value: 1.0
+data.img_processing.validation_aug.random_resized_crop_size:
+  value: [256, 256]
+data.img_processing.validation_aug.random_resized_scale:
+  value: [0.75, 1.0]
+data.img_processing.validation_aug.random_resized_ratio:
+  value: [0.9, 1.1]

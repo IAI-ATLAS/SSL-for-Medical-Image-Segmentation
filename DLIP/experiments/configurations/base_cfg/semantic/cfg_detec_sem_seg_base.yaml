@@ -1,0 +1,127 @@
+#  This file describes configuration details which are used by all experiments in this example project.
+#  This is done to avoid defining the same variables in multiple places.
+
+wandb.project_name:
+  value: derma
+# The w&b user or group the project should belong to.
+wandb.entity:
+  value: marcelschilling
+wandb.notes:
+  value: First test
+wandb.tags:
+  value: null
+# Valid values: online/enabled, offline, disabled
+# online/enabled = default, runs in online mode. Both enabled and online can be used.
+# offline = runs in offline mode, writes all data to disk for later syncing to a server.
+# disabled = makes all calls to wandb api's noop's.
+wandb.mode:
+  value: online
+
+experiment.name:
+  value: first-shot
+# Seed of this experiment to ensure reproducibility.
+experiment.seed:
+  value: 1337
+
+# Model Configuration
+model.name:
+  value: Detectron2Semantic
+model.params.base_lr:
+  value: 0.001
+model.params.sem_seg_head.num_classes:
+  value: 1
+
+# Trainer Configuration
+train.trainer.max_epochs:
+  value: 200
+train.trainer.num_sanity_val_steps:
+  value: 0
+train.trainer.gpus:
+  value: 1
+train.trainer.reload_dataloaders_every_epoch:
+  value: false
+
+# Data Configuration
+data.datamodule.name:
+  value: DetectronSemanticSegmentationDataModule
+data.datamodule.root_dirs:
+  value: 
+    local: /home/ws/sc1357/data/2017_ISIC_Derma/
+    iai_gpu: 
+    horeka: /lsdf/kit/iai/projects/iai-aida/Daten_Schilling/datasets/2017_ISIC_Derma
+    horkea_local: /home/hk-project-sppo/sc1357/data/2017_ISIC_Derma_filter
+data.datamodule.device:
+  value: horkea_local
+data.datamodule.arguments.n_classes:
+  value: 1
+data.datamodule.arguments.dataset_size:
+  value: 1.0
+data.datamodule.arguments.val_to_train_ratio:
+  value: 0.2
+data.datamodule.arguments.batch_size:
+  value: 2
+data.datamodule.arguments.num_workers:
+  value: 19
+data.datamodule.arguments.label_suffix:
+  value: "_segmentation"
+data.datamodule.arguments.map_look_up:
+  value: {0: 255}
+
+# Callbacks Configuration
+train.callbacks.save_k_top_models:
+  value: 0
+train.callbacks.early_stopping_enabled:
+  value: true
+train.callbacks.early_stopping_patience:
+  value: 100
+train.callbacks.best_metrics_log_enabled:
+  value: true
+train.callbacks.log_best_metric_dict:
+  value: {"val/loss":"min"}
+train.callbacks.epoch_duration_enabled:
+  value: true
+# train.callbacks.detectron_sem_seg_img_log_enabled:
+#   value: true
+  
+
+# General Augmentations
+data.img_processing.norm_type:
+  value: per_image_mean_std
+data.img_processing.img_type:
+  value: rgb_8_bit
+data.img_processing.replay_processing_pipeline:
+  value: false
+data.img_processing.img_size:
+  value: [512,512]
+
+# Augmentations
+data.img_processing.aug1.replay_processing_pipeline:
+  value: false
+
+# Flip
+data.img_processing.aug1.aug_flip_prob:
+  value: 0.5
+
+# Gaussian Blur
+data.img_processing.aug1.gaussian_blur_prop:
+  value: 0.25
+data.img_processing.aug1.gaussian_blur_sigma:
+  value: [0.1,1.0]
+
+# Scale/Rotate/Shift
+data.img_processing.aug1.aug_shift_scale_rotate_prob:
+  value: 0.25
+data.img_processing.aug1.aug_shift_scale_rotate_shift_lim:
+  value: 0.05
+data.img_processing.aug1.aug_shift_scale_rotate_scale_lim:
+  value: 0.05
+data.img_processing.aug1.aug_shift_scale_rotate_rot_lim:
+  value: 5
+
+# Contrast/Brightness Adjustment
+data.img_processing.aug1.aug_rand_brightness_contrast_prob:
+  value: 0.25
+data.img_processing.aug1.aug_rand_brightness_contrast_brightness_limit:
+  value: 0.1
+data.img_processing.aug1.aug_rand_brightness_contrast_contrast_limit:
+  value: 0.1

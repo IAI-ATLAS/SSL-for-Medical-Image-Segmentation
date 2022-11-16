@@ -1,0 +1,181 @@
+experiment.name:
+  value: first-shot
+# Seed of this experiment to ensure reproducibility.
+experiment.seed:
+  value: 1337
+
+# Model Configuration
+model.name:
+  value: UnetInstSegSupervised
+model.params.input_height:
+  value: 256
+model.params.in_channels:
+  value: 3
+model.params.out_channels:
+  value: 1
+model.params.encoder_type:
+  value: unet
+model.params.decoder_type:
+  value: unet
+  #value: unet
+model.params.pretraining_weights:
+   #value: /home/ws/kg2371/projects/self-supervised-biomedical-image-segmentation/results/first-shot/BearDetectionDataModule/Mocov2/0103/dnn_weights-v8.ckpt
+   #value: /home/ws/kg2371/Downloads/densecl.ckpt
+   #value: imagenet
+    value: null
+model.params.encoder_frozen:
+  value: true
+model.params.decoder_filters:
+  value: [256, 128, 64, 64, 32]
+model.params.ae_mode:
+  value: false
+model.params.imagenet_pretraing:
+  value: false
+model.loss_fcn:
+  value: DiceLoss
+model.params.img_size:
+  value: 256
+model.params.num_classes:
+  value: 1
+
+# Optimizer
+model.optimizer.type:
+  value: Adam
+model.optimizer.params.lr:
+  value: 0.001
+# LR Scheduler
+model.optimizer.lrs.type:
+  value: ReduceLROnPlateau
+model.optimizer.lrs.params.factor:
+  value: 0.5
+model.optimizer.lrs.params.patience:
+  value: 5
+model.optimizer.lrs.params.verbose:
+  value: false
+model.optimizer.lrs.params.cooldown:
+  value: 0
+model.optimizer.lrs.params.min_lr:
+  value: 0.00001
+
+
+# Trainer Configuration
+train.trainer.max_epochs:
+  value: 100
+train.trainer.num_sanity_val_steps:
+  value: 0
+train.trainer.gpus:
+  value: 1
+train.trainer.reload_dataloaders_every_epoch:
+  value: false
+
+# Data Configuration
+data.datamodule.name:
+  value: BearDetectionDataModule
+data.datamodule.root_dirs:
+  value: 
+    local: /home/ws/kg2371/datasets/coco_bear_detection
+    iai_gpu: 
+data.datamodule.device:
+  value: 
+    local
+data.datamodule.arguments.dataset_size:
+  value: 1.0
+data.datamodule.arguments.initial_labeled_ratio:
+  value: 1.0
+data.datamodule.arguments.val_to_train_ratio:
+  value: 0.2
+data.datamodule.arguments.batch_size:
+  value: 64
+data.datamodule.arguments.classifier_mode:
+  value: false
+
+
+# Callbacks Configuration
+train.callbacks.save_k_top_models:
+  value: 1
+train.callbacks.early_stopping_enabled:
+  value: true
+train.callbacks.early_stopping_patience:
+  value: 40
+train.callbacks.best_metrics_log_enabled:
+  value: true
+train.callbacks.log_best_metric_dict:
+  value: {"val/loss":"min"}
+train.callbacks.epoch_duration_enabled:
+  value: true
+# train.callbacks.img_log_inst_seg_enabled:
+#   value: true
+# train.callbacks.inst_seg_metrics_log_enabled:
+#   value: true
+# train.callbacks.inst_seg_pp.th_cell:
+#   value: 0.09
+# train.callbacks.inst_seg_pp.th_seed:
+#   value: 0.49
+# train.callbacks.inst_seg_pp.sigma_cell:
+#   value: 1.00
+# train.callbacks.inst_seg_pp.do_splitting:
+#   value: true
+# train.callbacks.inst_seg_pp.do_area_based_filtering:
+#   value: true
+# train.callbacks.inst_seg_pp.do_fill_holes:
+#   value: true
+# train.callbacks.inst_seg_pp.valid_area_median_factors:
+#   value: [0.25,3]
+
+
+# General Augmentations
+# data.img_processing.norm_type:
+#   value: per_image
+
+data.img_processing.img_type:
+  value: rgb_8_bit
+data.img_processing.replay_processing_pipeline:
+  value: false
+data.img_processing.img_size:
+  value: [256,256]
+
+
+# Augmentations
+data.img_processing.aug1.replay_processing_pipeline:
+  value: false
+
+# # Flip
+data.img_processing.aug1.aug_flip_prob:
+  value: 0.5
+
+# # Gaussian Blur
+# data.img_processing.aug1.gaussian_blur_prop:
+#   value: 0.5
+# data.img_processing.aug1.gaussian_blur_kernel_size:
+#   # Zero or odd
+#   value: [0,3]
+# data.img_processing.aug1.std_dev_range:
+#   value: [0,0]
+
+# # # Scale/Rotate/Shift
+# data.img_processing.aug1.aug_shift_scale_rotate_prob:
+#   value: 0.5
+# data.img_processing.aug1.aug_shift_scale_rotate_shift_lim:
+#   value: 0.1
+# data.img_processing.aug1.aug_shift_scale_rotate_scale_lim:
+#   value: 0.1
+# data.img_processing.aug1.aug_shift_scale_rotate_rot_lim:
+#   value: 10
+
+# # Contrast/Brightness Adjustment
+# data.img_processing.aug1.aug_rand_brightness_contrast_prob:
+#   value: 0.5
+# data.img_processing.aug1.aug_rand_brightness_contrast_brightness_limit:
+#   value: 0.1
+# data.img_processing.aug1.aug_rand_brightness_contrast_contrast_limit:
+#   value: 0.1
+
+# # Random Crop
+# data.img_processing.aug1.random_resized_propability:
+#   value: 0.5
+# data.img_processing.aug1.random_resized_crop_size:
+#   value: [128, 128]
+# data.img_processing.aug1.random_resized_scale:
+#   value: [0.8, 1.0]
+# data.img_processing.aug1.random_resized_ratio:
+#   value: [0.9, 1.1]

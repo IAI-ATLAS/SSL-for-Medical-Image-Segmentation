@@ -1,0 +1,162 @@
+experiment.name:
+  value: first-shot
+# Seed of this experiment to ensure reproducibility.
+experiment.seed:
+  value: 1337
+
+# Model Configuration
+model.name:
+  value: Mocov2
+model.params.in_channels:
+  value: 1
+model.loss_fcn:
+  value: SmoothL1Loss
+
+# Optimizer
+model.optimizer.type:
+  value: SGD
+model.optimizer.params.lr:
+  value: 0.03
+model.optimizer.params.momentum:
+  value: 0.9
+model.optimizer.params.weight_decay:
+  value: 0.0001
+# LR Scheduler
+model.optimizer.lrs.type:
+  value: CosineAnnealingLR
+model.optimizer.lrs.params.T_max:
+  value: 4000
+
+
+# Trainer Configuration
+train.trainer.max_epochs:
+  value: 4000
+train.trainer.num_sanity_val_steps:
+  value: 0
+train.trainer.gpus:
+  value: 1
+train.trainer.reload_dataloaders_every_epoch:
+  value: false
+
+# Data Configuration
+data.datamodule.name:
+  value: NIHChestXrayDataModule
+data.datamodule.root_dirs:
+  value: 
+    local: /home/ws/kg2371/datasets/chestxray
+    iai_gpu: 
+data.datamodule.device:
+  value: 
+    local
+data.datamodule.arguments.dataset_size:
+  value: 1.0
+data.datamodule.arguments.initial_labeled_ratio:
+  value: 1.0
+data.datamodule.arguments.val_to_train_ratio:
+  value: 0.2
+data.datamodule.arguments.batch_size:
+  value: 128
+  # BACK
+data.datamodule.arguments.drop_last:
+  value: false
+data.datamodule.arguments.labels_available:
+  value: false
+
+
+# Callbacks Configuration
+train.callbacks.save_k_top_models:
+  value: 10
+train.callbacks.early_stopping_enabled:
+  value: false
+train.callbacks.early_stopping_patience:
+  value: 40
+train.callbacks.best_metrics_log_enabled:
+  value: true
+train.callbacks.log_best_metric_dict:
+  value: {"val/loss":"min"}
+train.callbacks.epoch_duration_enabled:
+  value: true
+train.callbacks.increase_ssl_image_size_enabled:
+  value: true
+train.callbacks.increase_ssl_image_size_factor:
+  value: 2
+
+# General Augmentations
+# data.img_processing.norm_type:
+#   value: per_image
+
+data.img_processing.img_type:
+  value: rgb_8_bit
+data.img_processing.replay_processing_pipeline:
+  value: false
+data.img_processing.img_size:
+  value: [256,256]
+
+# Augmentations
+data.img_processing.aug1.replay_processing_pipeline:
+  value: false
+
+# Random Crop
+data.img_processing.aug1.random_resized_propability:
+  value: 1.0
+data.img_processing.aug1.random_resized_crop_size:
+  value: [256, 256]
+data.img_processing.aug1.random_resized_scale:
+  value: [0.6, 1.0]
+data.img_processing.aug1.random_resized_ratio:
+  value: [1., 1.]
+
+# Flip
+data.img_processing.aug1.aug_flip_prob:
+  value: 0.5
+
+# Scale/Rotate/Shift
+data.img_processing.aug1.aug_shift_scale_rotate_prob:
+  value: 0.5
+data.img_processing.aug1.aug_shift_scale_rotate_shift_lim:
+  value: 0.1
+data.img_processing.aug1.aug_shift_scale_rotate_scale_lim:
+  value: 0.0
+data.img_processing.aug1.aug_shift_scale_rotate_rot_lim:
+  value: 10
+
+
+
+
+
+# Random Crop
+data.img_processing.aug2.random_resized_propability:
+  value: 1.0
+data.img_processing.aug2.random_resized_crop_size:
+  value: [256, 256]
+data.img_processing.aug2.random_resized_scale:
+  value: [0.6, 1.0]
+data.img_processing.aug2.random_resized_ratio:
+  value: [1., 1.]
+
+# Flip
+data.img_processing.aug2.aug_flip_prob:
+  value: 0.5
+
+# Scale/Rotate/Shift
+data.img_processing.aug2.aug_shift_scale_rotate_prob:
+  value: 0.5
+data.img_processing.aug2.aug_shift_scale_rotate_shift_lim:
+  value: 0.1
+data.img_processing.aug2.aug_shift_scale_rotate_scale_lim:
+  value: 0.0
+data.img_processing.aug2.aug_shift_scale_rotate_rot_lim:
+  value: 10
+
+
+
+
+ # Validation Augmentations
+data.img_processing.validation_aug.random_resized_propability:
+  value: 1.0
+data.img_processing.validation_aug.random_resized_crop_size:
+  value: [256, 256]
+data.img_processing.validation_aug.random_resized_scale:
+  value: [0.8, 1.0]
+data.img_processing.validation_aug.random_resized_ratio:
+  value: [0.1, 1.]
