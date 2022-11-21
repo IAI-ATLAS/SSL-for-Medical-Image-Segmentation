@@ -91,9 +91,9 @@ logging.warn(f"Working Dir: {os.getcwd()}")
 seed_everything(seed=cfg_yaml['experiment.seed']['value'])
 parameters_splitted = split_parameters(config, ["model", "train", "data"])
 
-# model = load_model(parameters_splitted["model"], 
-#     checkpoint_path_str=checkpoint_path              
-# )
+model = load_model(parameters_splitted["model"], 
+    checkpoint_path_str=checkpoint_path              
+)
 # ref_model  = load_model(parameters_splitted["model"], 
 #     checkpoint_path_str=ref_checkpoint_path                 
 # )

@@ -39,8 +39,6 @@ class UnetInstance(UnetBase):
                 pretraining_weights,
                 encoder_frozen,
                 **kwargs)
- 
-        
         self.post_pro = DistMapPostProcessor(**split_parameters(kwargs, ["post_pro"])["post_pro"])
         
     def training_step(self, batch, batch_idx):

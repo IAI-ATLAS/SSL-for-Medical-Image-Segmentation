@@ -163,7 +163,7 @@ class BaseInstanceSegmentationDataset(BaseDataset):
         if self.return_trafos and not self.labels_available:
             return sample_img_lst, trafo_lst
         if not self.return_trafos and self.labels_available:
-            return sample_img_lst, self.numeric_classes[self.class_mappings[sample_path.split('/')[-1].split('.')[0]]]
+            return sample_img_lst, label_lst
         if self.return_trafos and self.labels_available:
             return sample_img_lst, label_lst, trafo_lst
 

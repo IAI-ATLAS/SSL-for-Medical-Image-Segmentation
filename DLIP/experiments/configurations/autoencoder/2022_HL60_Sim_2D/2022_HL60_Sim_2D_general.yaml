@@ -15,4 +15,4 @@ wandb.tags:
 # offline = runs in offline mode, writes all data to disk for later syncing to a server.
 # disabled = makes all calls to wandb api's noop's.
 wandb.mode:
-  value: online
+  value: disabled

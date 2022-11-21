@@ -55,8 +55,10 @@ data.datamodule.name:
   value: BaseInstanceSegmentationDataModule
 data.datamodule.root_dirs:
   value: 
-    local: /home/ws/kg2371/lsdf/Daten_Schilling/datasets/2022_HL60_Sim_2D
-    iai_gpu: 
+    local: /home/ws/kg2371/datasets/2018_MoNuSeg_cropped
+    iai_gpu:
+    horeka: 
+    horeka_local: /home/ws/kg2371/datasets/2018_MoNuSeg_cropped
 data.datamodule.device:
   value: local
 data.datamodule.arguments.dataset_size:
@@ -64,11 +66,13 @@ data.datamodule.arguments.dataset_size:
 data.datamodule.arguments.val_to_train_ratio:
   value: 0.2
 data.datamodule.arguments.batch_size:
-  value: 16
+  value: 2
 data.datamodule.arguments.num_workers:
-  value: 32
+  value: 19
 data.datamodule.arguments.label_suffix:
-  value: '_label'
+  value: ""
+data.datamodule.arguments.initial_labeled_ratio:
+  value: 1.0
 
 # Callbacks Configuration
 train.callbacks.save_k_top_models:

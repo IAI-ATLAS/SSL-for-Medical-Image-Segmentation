@@ -15,7 +15,7 @@ wandb.tags:
 # offline = runs in offline mode, writes all data to disk for later syncing to a server.
 # disabled = makes all calls to wandb api's noop's.
 wandb.mode:
-  value: disabled
+  value: online
 
 experiment.name:
   value: first-shot
@@ -25,7 +25,7 @@ experiment.seed:
 
 # Model Configuration
 model.name:
-  value: UnetInstance
+  value: UnetAE
 model.params.in_channels:
   value: 3
 model.params.encoder_type:
@@ -93,7 +93,7 @@ data.datamodule.name:
   value: BaseInstanceSegmentationDataModule
 data.datamodule.root_dirs:
   value: 
-    local: /home/ws/kg2371/lsdf/Daten_Schilling/datasets/2018_MoNuSeg_cropped/
+    local: /home/ws/kg2371/datasets/2018_MoNuSeg_cropped
     iai_gpu:
     horeka: 
     horeka_local: /home/hk-project-sppo/sc1357/data/2018_MoNuSeg_cropped
@@ -106,7 +106,7 @@ data.datamodule.arguments.val_to_train_ratio:
 data.datamodule.arguments.batch_size:
   value: 2
 data.datamodule.arguments.num_workers:
-  value: 19
+  value: 0
 data.datamodule.arguments.label_suffix:
   value: ""
 data.datamodule.arguments.initial_labeled_ratio:
