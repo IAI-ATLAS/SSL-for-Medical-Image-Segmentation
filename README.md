@@ -26,6 +26,6 @@ The training (`DLIP/scripts/train.py`) and inference script (`DLIP/scripts/infer
 - Python == 3.8.5
 - Pip == 21.2.4
 ### Conda Environment
-`conda create --name YOUR_ENV_NAME -f environment.yml`
+`conda create --name YOUR_ENV_NAME -f snv_ssl.yml`
 ### Pip Installation
 1. Run `pip install -e .`
